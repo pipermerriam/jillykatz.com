@@ -1,0 +1,50 @@
+<!doctype HTML>
+{% load compress pages_tags %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="{% block seo_description %}{% endblock %}" />
+  <meta name="keywords" content="{% block seo_keywords %}{% endblock %}" />
+  <title>{% block title %}Site Title{% endblock %}</title>
+  <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
+  {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-responsive.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/site.scss' %}" />
+  {% endcompress %}
+  {% compress js %}
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/site.js' %}"></script>
+  {% endcompress %}
+</head>
+<body>
+  <div class="navbar navbar-static-top">
+    <a class="navbar-brand" href="#">Home</a>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Link 1</a></li>
+      <li><a href="#">Link 2</a></li>
+      <li><a href="#">Link 2</a></li>
+    </ul>
+  </div>
+  <div class="container">
+    <header>
+      <div class="row">
+      </div>
+    </header>
+    {% block messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          <button class="close" data-dismiss="alert">&times;</button>
+          <h4 class="alert=heading">{{ message.tags|title }}</h4>
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+  </div>
+  <div id="footer">
+  </div>
+</body>
+</html>
